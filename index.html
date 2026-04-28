@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternReady - Student Internship Platform</title>
+
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- =========================
+         HEADER / NAVIGATION
+         ========================= -->
+    <header class="site-header">
+        <div class="nav-container">
+            <!-- Project logo -->
+            <a href="#home" class="logo">
+                <span class="logo-icon">IR</span>
+                <span>InternReady</span>
+            </a>
+
+            <!-- Navigation links -->
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#checker">Readiness</a>
+                <a href="#skills">Skills</a>
+                <a href="#opportunities">Internships</a>
+                <a href="#interview">Interview Prep</a>
+            </nav>
+
+            <!-- Header button -->
+            <a href="#opportunities" class="nav-button">Browse Internships</a>
+        </div>
+    </header>
+
+    <!-- =========================
+         HERO SECTION
+         ========================= -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">Internship Platform for University Students</div>
+
+            <h1>Prepare, discover, and apply for your first internship.</h1>
+
+            <p>
+                InternReady helps university students check their readiness,
+                track important skills, browse beginner-friendly internships,
+                and prepare for interviews.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#checker" class="primary-btn">Check My Readiness</a>
+                <a href="#opportunities" class="secondary-btn">Browse Internships</a>
+            </div>
+        </div>
+
+        <!-- Hero dashboard preview -->
+        <div class="hero-panel">
+            <div class="panel-header">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="score-preview">
+                <p>Readiness Score</p>
+                <h2><span id="hero-score">0</span>%</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="hero-progress"></div>
+                </div>
+            </div>
+
+            <div class="mini-stats">
+                <div>
+                    <strong id="hero-skill-count">0</strong>
+                    <span>Skills Selected</span>
+                </div>
+                <div>
+                    <strong id="hero-saved-count">0</strong>
+                    <span>Saved Internships</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         PROBLEM AND SOLUTION SECTION
+         ========================= -->
+    <section class="section">
+        <div class="section-title">
+            <span>Problem & Solution</span>
+            <h2>Students often know they need an internship, but not how to start.</h2>
+            <p>
+                Many students lack a clear roadmap, do not know which skills are missing,
+                and struggle to find suitable beginner-friendly opportunities.
+            </p>
+        </div>
+
+        <div class="card-grid">
+            <div class="info-card">
+                <div class="card-icon">🎯</div>
+                <h3>Clear Direction</h3>
+                <p>Students can see what they need before applying for internships.</p>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon">🧭</div>
+                <h3>Opportunity Discovery</h3>
+                <p>Students can browse internships by category, location, and requirements.</p>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon">🚀</div>
+                <h3>Career Preparation</h3>
+                <p>The platform supports CV, skills, interview, and application preparation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         READINESS CHECKER SECTION
+         ========================= -->
+    <section class="section split-section" id="checker">
+        <div class="section-title left-title">
+            <span>Readiness Checker</span>
+            <h2>Calculate your internship readiness score.</h2>
+            <p>
+                Select the items you have already completed. JavaScript calculates
+                your score and gives simple feedback.
+            </p>
+        </div>
+
+        <div class="checker-layout">
+            <!-- Checklist form -->
+            <div class="glass-card">
+                <h3>Preparation Checklist</h3>
+
+                <!-- Each checkbox gives points to the readiness score -->
+                <label class="check-item">
+                    <input type="checkbox" class="readiness-check" value="15">
+                    <span>I have a clean CV / resume</span>
+                </label>
+
+                <label class="check-item">
+                    <input type="checkbox" class="readiness-check" value="15">
+                    <span>I have at least one project to show</span>
+                </label>
+
+                <label class="check-item">
+                    <input type="checkbox" class="readiness-check" value="15">
+                    <span>I know basic HTML, CSS, and JavaScript</span>
+                </label>
+
+                <label class="check-item">
+                    <input type="checkbox" class="readiness-check" value="10">
+                    <span>I have a GitHub or portfolio link</span>
+                </label>
+
+                <label class="check-item">
+                    <input type="checkbox" class="readiness-check" value="15">
+                    <span>I practiced common interview questions</span>
+                </label>
+
+                <label class="check-item">
+                    <input type="checkbox" class="readiness-check" value="15">
+                    <span>I know how to write a short cover letter</span>
+                </label>
+
+                <label class="check-item">
+                    <input type="checkbox" class="readiness-check" value="15">
+                    <span>I have found internships that match my skills</span>
+                </label>
+            </div>
+
+            <!-- Readiness result card -->
+            <div class="result-card">
+                <p class="result-label">Your Readiness</p>
+                <h2><span id="readiness-score">0</span>%</h2>
+
+                <div class="progress-bar large-progress">
+                    <div class="progress-fill" id="readiness-progress"></div>
+                </div>
+
+                <p id="readiness-message">
+                    Start selecting items to see your readiness level.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         SKILLS TRACKER SECTION
+         ========================= -->
+    <section class="section" id="skills">
+        <div class="section-title">
+            <span>Skills Tracker</span>
+            <h2>Track your technical and soft skills.</h2>
+            <p>
+                Select the skills you already have. The platform shows selected
+                and missing skills for internship preparation.
+            </p>
+        </div>
+
+        <div class="skills-layout">
+            <!-- Skill checkbox list -->
+            <div class="glass-card">
+                <h3>Select Your Skills</h3>
+
+                <div class="skills-grid">
+                    <label><input type="checkbox" class="skill-check" value="HTML"> HTML</label>
+                    <label><input type="checkbox" class="skill-check" value="CSS"> CSS</label>
+                    <label><input type="checkbox" class="skill-check" value="JavaScript"> JavaScript</label>
+                    <label><input type="checkbox" class="skill-check" value="GitHub"> GitHub</label>
+                    <label><input type="checkbox" class="skill-check" value="SQL"> SQL</label>
+                    <label><input type="checkbox" class="skill-check" value="Python"> Python</label>
+                    <label><input type="checkbox" class="skill-check" value="Communication"> Communication</label>
+                    <label><input type="checkbox" class="skill-check" value="Teamwork"> Teamwork</label>
+                </div>
+            </div>
+
+            <!-- Skill summary output -->
+            <div class="glass-card">
+                <h3>Skill Summary</h3>
+
+                <p class="muted-text">Selected skills:</p>
+                <div id="selected-skills" class="tag-container">
+                    <span class="empty-text">No skills selected yet.</span>
+                </div>
+
+                <p class="muted-text top-space">Missing skills:</p>
+                <div id="missing-skills" class="tag-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         INTERNSHIP OPPORTUNITIES SECTION
+         Replaces the old manual application tracker
+         ========================= -->
+    <section class="section split-section" id="opportunities">
+        <div class="section-title left-title">
+            <span>Internship Opportunities</span>
+            <h2>Browse beginner-friendly internships for students.</h2>
+            <p>
+                This section helps students discover internship opportunities instead
+                of manually typing company names. Students can filter by category
+                and save opportunities they like.
+            </p>
+        </div>
+
+        <!-- Filter buttons. JavaScript uses data-category values. -->
+        <div class="filter-bar">
+            <button class="filter-btn active-filter" data-category="All" onclick="filterInternships('All')">All</button>
+            <button class="filter-btn" data-category="Web" onclick="filterInternships('Web')">Web</button>
+            <button class="filter-btn" data-category="Data" onclick="filterInternships('Data')">Data</button>
+            <button class="filter-btn" data-category="Cybersecurity" onclick="filterInternships('Cybersecurity')">Cybersecurity</button>
+            <button class="filter-btn" data-category="Design" onclick="filterInternships('Design')">Design</button>
+        </div>
+
+        <!-- JavaScript will insert internship cards inside this container -->
+        <div class="internship-grid" id="internship-list"></div>
+
+        <!-- Saved internships area -->
+        <div class="saved-box">
+            <h3>Saved Internships</h3>
+            <p class="muted-text">
+                Saved opportunities appear here. This helps students remember where they want to apply.
+            </p>
+
+            <div id="saved-list" class="saved-list">
+                <span class="empty-text">No internships saved yet.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         INTERVIEW PREPARATION SECTION
+         ========================= -->
+    <section class="section" id="interview">
+        <div class="section-title">
+            <span>Interview Prep</span>
+            <h2>Practice common internship interview questions.</h2>
+            <p>
+                Click a question to reveal a short answer tip.
+            </p>
+        </div>
+
+        <div class="accordion">
+            <!-- Each accordion item opens when clicked -->
+            <div class="accordion-item">
+                <button onclick="toggleTip(0)">Tell me about yourself.</button>
+                <p class="tip-text">Mention your education, main skills, one project, and your internship goal.</p>
+            </div>
+
+            <div class="accordion-item">
+                <button onclick="toggleTip(1)">Why do you want this internship?</button>
+                <p class="tip-text">Connect the internship to your learning goals and explain how you can contribute.</p>
+            </div>
+
+            <div class="accordion-item">
+                <button onclick="toggleTip(2)">What project are you proud of?</button>
+                <p class="tip-text">Describe the problem, your role, technologies used, and what you learned.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
+    <footer class="footer">
+        <p>InternReady — Internship Discovery and Readiness Platform for University Students</p>
+        <p>Built with HTML, CSS, and JavaScript</p>
+    </footer>
+
+    <!-- Link to JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
