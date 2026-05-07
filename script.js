@@ -20,53 +20,40 @@ const allSkills = [
    For this front-end prototype, we store opportunities in an array.
 */
 const internships = [
+  const internships = [
+
     {
-        company: "TechSoft Academy",
-        title: "Frontend Intern",
+        company: "BrightWeb Studio",
+        title: "Front-End Developer Intern",
         category: "Web",
         location: "Remote",
-        deadline: "May 25",
-        requirements: "HTML, CSS, JavaScript"
-    },
-    {
-        company: "DataVision Lab",
-        title: "Junior Data Analyst Intern",
-        category: "Data",
-        location: "Hybrid",
-        deadline: "June 1",
-        requirements: "Excel, SQL, basic Python"
-    },
-    {
-        company: "SecureNet Center",
-        title: "Cybersecurity Awareness Intern",
-        category: "Cybersecurity",
-        location: "On-site",
-        deadline: "May 30",
-        requirements: "Networking basics, communication"
-    },
-    {
-        company: "CreativePixel Studio",
-        title: "UI Design Intern",
-        category: "Design",
-        location: "Remote",
-        deadline: "June 5",
-        requirements: "Figma, basic design principles"
-    },
-    {
-        company: "WebCraft Solutions",
-        title: "Website Support Intern",
-        category: "Web",
-        location: "On-site",
         deadline: "June 10",
-        requirements: "HTML, CSS, GitHub"
+
+        description:
+            "Assist in building responsive web pages and interactive UI components.",
+
+        requirements:
+            "Basic HTML, CSS, JavaScript, and GitHub knowledge.",
+
+        offers:
+            "Mentorship, portfolio experience, flexible schedule."
     },
+
     {
-        company: "Insight Analytics",
-        title: "Research Data Intern",
-        category: "Data",
-        location: "Remote",
-        deadline: "June 12",
-        requirements: "Data cleaning, charts, reports"
+        company: "CyberShield Lab",
+        title: "SOC Assistant Intern",
+        category: "Cybersecurity",
+        location: "Hybrid",
+        deadline: "June 18",
+
+        description:
+            "Assist in monitoring alerts and preparing awareness materials for internal users.",
+
+        requirements:
+            "Basic networking knowledge and cybersecurity interest.",
+
+        offers:
+            "SIEM exposure, mentorship, beginner SOC experience."
     }
 ];
 
