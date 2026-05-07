@@ -185,7 +185,7 @@ function renderInternships(category) {
     }
 
     /* Create one card for each internship */
-    filteredInternships.forEach(function (internship, index) {
+    filteredInternships.forEach(function (internship) {
         const originalIndex = internships.indexOf(internship);
 
         const card = document.createElement("div");
@@ -202,14 +202,21 @@ function renderInternships(category) {
             <p class="company-name">${internship.company}</p>
 
             <div class="internship-details">
+                <p><strong>Description:</strong> ${internship.description}</p>
+                <p><strong>Requirements:</strong> ${internship.requirements}</p>
+                <p><strong>What company offers:</strong> ${internship.offers}</p>
                 <p><strong>Location:</strong> ${internship.location}</p>
                 <p><strong>Deadline:</strong> ${internship.deadline}</p>
-                <p><strong>Requirements:</strong> ${internship.requirements}</p>
             </div>
 
             <div class="card-actions">
                 <button class="save-btn" onclick="saveInternship(${originalIndex})">Save</button>
-                <button class="apply-btn" onclick="showApplyMessage('${internship.company}')">Apply</button>
+
+                ${
+                    appliedInternships.includes(originalIndex)
+                    ? `<button class="applied-btn" disabled>Applied</button>`
+                    : `<button class="apply-btn" onclick="openApplyModal(${originalIndex})">Apply</button>`
+                }
             </div>
         `;
 
