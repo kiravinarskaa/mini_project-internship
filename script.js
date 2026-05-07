@@ -2,7 +2,8 @@
    INTERNREADY V2 JAVASCRIPT
    This file adds logic and interaction to the website
    ===================================== */
-
+let selectedInternshipIndex = null;
+let appliedInternships = [];
 /* List of all important skills for the skill tracker */
 const allSkills = [
     "HTML",
@@ -295,13 +296,8 @@ function removeSavedInternship(index) {
     renderSavedInternships();
 }
 
-/* This function shows a simple apply message.
-   Since this is a front-end prototype, we do not send a real application.
-*/
-function showApplyMessage(company) {
-    alert("Demo action: You selected Apply for " + company + ". In a full version, this would open an application form.");
-}
 
+openApplyModal(originalIndex)
 /* This helper function creates company initials for the logo circle */
 function getInitials(companyName) {
     return companyName
