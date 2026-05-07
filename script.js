@@ -20,8 +20,6 @@ const allSkills = [
    For this front-end prototype, we store opportunities in an array.
 */
 const internships = [
-  const internships = [
-
     {
         company: "BrightWeb Studio",
         title: "Front-End Developer Intern",
