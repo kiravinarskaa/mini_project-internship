@@ -21,6 +21,135 @@ const allSkills = [
    For this front-end prototype, we store opportunities in an array.
 */
 const internships = [
+   {
+    company: "NovaWeb Systems",
+    title: "UI Components Intern",
+    category: "Web",
+    location: "Remote",
+    deadline: "July 8",
+
+    description:
+        "Help create reusable website components and improve responsive layouts.",
+
+    requirements:
+        "Basic HTML, CSS, JavaScript, and responsive design understanding.",
+
+    offers:
+        "Mentorship, portfolio projects, flexible schedule."
+},
+
+{
+    company: "Skyline Digital",
+    title: "Front-End Support Intern",
+    category: "Web",
+    location: "Hybrid",
+    deadline: "July 12",
+
+    description:
+        "Assist developers in testing pages, fixing layout issues, and improving UI consistency.",
+
+    requirements:
+        "Basic web development skills and attention to detail.",
+
+    offers:
+        "Real team experience, internship certificate, training sessions."
+},{
+    company: "NetGuard Solutions",
+    title: "Junior Security Operations Intern",
+    category: "Cybersecurity",
+    location: "Remote",
+    deadline: "July 7",
+
+    description:
+        "Support monitoring activities and help organize cybersecurity awareness tasks.",
+
+    requirements:
+        "Interest in networking and cybersecurity basics.",
+
+    offers:
+        "SOC exposure, mentorship, beginner-friendly environment."
+},
+
+{
+    company: "SafeByte Technologies",
+    title: "Cyber Hygiene Intern",
+    category: "Cybersecurity",
+    location: "On-site",
+    deadline: "July 14",
+
+    description:
+        "Assist with awareness campaigns, phishing simulations, and internal documentation.",
+
+    requirements:
+        "Communication skills and basic security understanding.",
+
+    offers:
+        "Awareness training experience, practical tasks, mentor support."
+},{
+    company: "VisionMetrics",
+    title: "Business Reporting Intern",
+    category: "Data",
+    location: "Hybrid",
+    deadline: "July 9",
+
+    description:
+        "Assist in preparing charts, summaries, and simple analytical reports.",
+
+    requirements:
+        "Excel knowledge and analytical thinking.",
+
+    offers:
+        "Dashboard practice, teamwork experience, mentor guidance."
+},
+
+{
+    company: "DataCore Analytics",
+    title: "Junior Data Visualization Intern",
+    category: "Data",
+    location: "Remote",
+    deadline: "July 15",
+
+    description:
+        "Help convert raw data into understandable dashboards and visual reports.",
+
+    requirements:
+        "Basic SQL or spreadsheet knowledge.",
+
+    offers:
+        "Visualization practice, flexible schedule, internship certificate."
+},{
+    company: "CreativeFlow Studio",
+    title: "UI Prototype Intern",
+    category: "Design",
+    location: "Remote",
+    deadline: "July 10",
+
+    description:
+        "Assist in designing application layouts and interactive prototypes.",
+
+    requirements:
+        "Basic Figma and design principles knowledge.",
+
+    offers:
+        "Portfolio projects, design feedback, creative mentorship."
+},
+
+{
+    company: "PixelWave Agency",
+    title: "UX Research Assistant Intern",
+    category: "Design",
+    location: "Hybrid",
+    deadline: "July 16",
+
+    description:
+        "Support user testing sessions and help organize usability feedback.",
+
+    requirements:
+        "Interest in UI/UX and communication skills.",
+
+    offers:
+        "Real UX workflow exposure, collaborative environment, mentor support."
+},
     {
         company: "BrightWeb Studio",
         title: "Front-End Developer Intern",
