@@ -297,7 +297,50 @@ function removeSavedInternship(index) {
 }
 
 
-openApplyModal(originalIndex)
+/* Opens application form modal */
+function openApplyModal(index) {
+    selectedInternshipIndex = index;
+
+    const internship = internships[index];
+
+    document.getElementById("modal-job-title").textContent =
+        internship.title + " at " + internship.company;
+
+    document.getElementById("applicant-name").value = "";
+    document.getElementById("applicant-email").value = "";
+    document.getElementById("applicant-message").value = "";
+    document.getElementById("application-success").textContent = "";
+
+    document.getElementById("apply-modal").style.display = "flex";
+}
+
+/* Closes application form modal */
+function closeApplyModal() {
+    document.getElementById("apply-modal").style.display = "none";
+}
+
+/* Submits application form */
+function submitApplication() {
+    const name = document.getElementById("applicant-name").value.trim();
+    const email = document.getElementById("applicant-email").value.trim();
+    const message = document.getElementById("applicant-message").value.trim();
+
+    if (name === "" || email === "" || message === "") {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    appliedInternships.push(selectedInternshipIndex);
+
+    document.getElementById("application-success").textContent =
+        "Application submitted successfully!";
+
+    renderInternships("All");
+
+    setTimeout(function () {
+        closeApplyModal();
+    }, 1000);
+}
 /* This helper function creates company initials for the logo circle */
 function getInitials(companyName) {
     return companyName
