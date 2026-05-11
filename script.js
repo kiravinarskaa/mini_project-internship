@@ -246,7 +246,9 @@ skillChecks.forEach(function (checkbox) {
 });
 
 /* This function updates selected and missing skills */
+/* This function updates selected and missing skills */
 function updateSkills() {
+
     let selectedSkills = [];
 
     /* Collect selected skills */
@@ -256,41 +258,127 @@ function updateSkills() {
         }
     });
 
-    /* Find skills that are not selected */
-    const missingSkills = allSkills.filter(function (skill) {
-        return !selectedSkills.includes(skill);
+    /* Update hero skill number */
+    document.getElementById("hero-skill-count").textContent =
+        selectedSkills.length;
+
+    /* Career groups */
+    const careerGroups = {
+
+        web: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "GitHub"
+        ],
+
+        data: [
+            "Excel",
+            "SQL",
+            "Python",
+            "Data Visualization"
+        ],
+
+        cyber: [
+            "Networking",
+            "Linux",
+            "Security Basics",
+            "Risk Awareness"
+        ],
+
+        design: [
+            "Figma",
+            "Wireframing",
+            "Typography",
+            "UX Research"
+        ],
+
+        soft: [
+            "Communication",
+            "Teamwork"
+        ]
+    };
+
+    /* Update each category */
+    for (const group in careerGroups) {
+
+        const selected = careerGroups[group].filter(skill =>
+            selectedSkills.includes(skill)
+        );
+
+        const missing = careerGroups[group].filter(skill =>
+            !selectedSkills.includes(skill)
+        );
+
+        showTags(`${group}-selected`, selected, false);
+
+        showTags(`${group}-missing`, missing, true);
+    }
+}
+/* Toggle between selected and missing summaries */
+function showSkillSummary(type) {
+
+    const selectedSummary =
+        document.getElementById("selected-summary");
+
+    const missingSummary =
+        document.getElementById("missing-summary");
+
+    const buttons =
+        document.querySelectorAll(".summary-btn");
+
+    buttons.forEach(function(button) {
+        button.classList.remove("active-summary");
     });
 
-    /* Update hero skill number */
-    document.getElementById("hero-skill-count").textContent = selectedSkills.length;
+    if (type === "selected") {
 
-    /* Show selected skills */
-    showTags("selected-skills", selectedSkills, false);
+        selectedSummary.classList.remove("hidden-summary");
 
-    /* Show missing skills */
-    showTags("missing-skills", missingSkills, true);
+        missingSummary.classList.add("hidden-summary");
+
+        buttons[0].classList.add("active-summary");
+
+    } else {
+
+        missingSummary.classList.remove("hidden-summary");
+
+        selectedSummary.classList.add("hidden-summary");
+
+        buttons[1].classList.add("active-summary");
+    }
 }
-
 /* This helper function displays skill tags */
 function showTags(containerId, items, isMissing) {
-    const container = document.getElementById(containerId);
+
+    const container =
+        document.getElementById(containerId);
+
     container.innerHTML = "";
 
-    /* If no items exist, show empty message */
+    /* Empty state */
     if (items.length === 0) {
-        container.innerHTML = '<span class="empty-text">Nothing to show.</span>';
+
+        container.innerHTML =
+            '<span class="empty-text">Nothing to show.</span>';
+
         return;
     }
 
-    /* Create a tag for each item */
-    items.forEach(function (item) {
-        const tag = document.createElement("span");
-        tag.className = isMissing ? "tag missing" : "tag";
+    /* Create tags */
+    items.forEach(function(item) {
+
+        const tag =
+            document.createElement("span");
+
+        tag.className =
+            isMissing ? "tag missing" : "tag";
+
         tag.textContent = item;
+
         container.appendChild(tag);
     });
 }
-
 /* =====================================
    INTERNSHIP OPPORTUNITIES LOGIC
    ===================================== */
