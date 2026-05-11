@@ -34,7 +34,8 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Main body style */
+/*  Main page style:
+   font, background gradients, text color, and line spacing */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     background:
@@ -48,6 +49,7 @@ body {
 /* =====================================
    HEADER
    ===================================== */
+/* Sticky header stays visible at the top while scrolling */
 .site-header {
     position: sticky;
     top: 0;
@@ -101,7 +103,7 @@ body {
     gap: 8px;
     flex-wrap: wrap;
 }
-
+/* Individual navigation link style */
 .nav-links a {
     color: var(--dark-soft);
     text-decoration: none;
@@ -110,7 +112,7 @@ body {
     font-weight: 600;
     transition: 0.25s;
 }
-
+/* Hover effect for navigation links */
 .nav-links a:hover {
     background: rgba(99, 102, 241, 0.10);
     color: var(--primary-dark);
@@ -130,6 +132,7 @@ body {
 /* =====================================
    HERO SECTION
    ===================================== */
+/* Main hero layout with text on the left and dashboard preview on the right */
 .hero {
     max-width: 1180px;
     margin: 28px auto 0;
@@ -244,7 +247,7 @@ body {
     gap: 8px;
     margin-bottom: 28px;
 }
-
+/* Individual dot style */
 .panel-header span {
     width: 12px;
     height: 12px;
@@ -261,12 +264,12 @@ body {
     border-radius: 24px;
     box-shadow: var(--soft-shadow);
 }
-
+/* Small text inside score preview */
 .score-preview p {
     color: var(--muted);
     margin-bottom: 8px;
 }
-
+/* Large score number */
 .score-preview h2 {
     font-size: 54px;
     margin-bottom: 14px;
@@ -299,7 +302,7 @@ body {
     gap: 14px;
     margin-top: 14px;
 }
-
+/* Each small statistic card */
 .mini-stats div {
     background: white;
     border-radius: 20px;
@@ -307,11 +310,12 @@ body {
     box-shadow: var(--soft-shadow);
 }
 
+/* Statistic number */
 .mini-stats strong {
     display: block;
     font-size: 28px;
 }
-
+/* Statistic label */
 .mini-stats span {
     color: var(--muted);
     font-size: 14px;
@@ -320,6 +324,7 @@ body {
 /* =====================================
    GENERAL SECTIONS
    ===================================== */
+/* General section container used throughout the page */
 .section {
     max-width: 1180px;
     margin: 0 auto;
@@ -332,7 +337,7 @@ body {
     margin: 0 auto 34px;
     text-align: center;
 }
-
+/* Small uppercase section label */
 .section-title span {
     color: var(--primary-dark);
     font-weight: 900;
@@ -340,14 +345,14 @@ body {
     font-size: 13px;
     letter-spacing: 1px;
 }
-
+/* Section heading */
 .section-title h2 {
     font-size: 40px;
     line-height: 1.15;
     letter-spacing: -0.8px;
     margin: 10px 0 14px;
 }
-
+/* Section description */
 .section-title p {
     color: var(--muted);
     font-size: 17px;
@@ -362,13 +367,14 @@ body {
 /* =====================================
    CARDS
    ===================================== */
+/* Three-column grid for information cards */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 22px;
 }
 
-/* Information card */
+/* Shared card style for many components */
 .info-card,
 .glass-card,
 .result-card,
@@ -381,12 +387,13 @@ body {
     backdrop-filter: blur(12px);
 }
 
-/* Information card layout */
+/* Inner spacing and animation for information cards */
 .info-card {
     padding: 28px;
     transition: 0.25s;
 }
 
+/* Card hover effect */
 .info-card:hover,
 .glass-card:hover,
 .result-card:hover,
@@ -395,7 +402,7 @@ body {
     box-shadow: var(--shadow);
 }
 
-/* Icon circle */
+/* Circular icon block in information cards */
 .card-icon {
     width: 54px;
     height: 54px;
@@ -406,13 +413,13 @@ body {
     font-size: 24px;
     background: rgba(99, 102, 241, 0.12);
 }
-
+/* Headings inside cards */
 .info-card h3,
 .glass-card h3 {
     margin-bottom: 10px;
     font-size: 22px;
 }
-
+/* Paragraphs inside cards */
 .info-card p,
 .glass-card p {
     color: var(--muted);
@@ -421,13 +428,14 @@ body {
 /* =====================================
    READINESS CHECKER
    ===================================== */
+/* Shared grid layout for readiness and skills sections */
 .checker-layout,
 .skills-layout {
     display: grid;
     gap: 22px;
 }
 
-/* Readiness section layout */
+/* Readiness section layout with two columns */
 .checker-layout {
     grid-template-columns: 1.1fr 0.9fr;
 }
@@ -448,11 +456,11 @@ body {
     font-weight: 600;
 }
 
+/* Removes border from the last checklist item */
 .check-item:last-child {
     border-bottom: none;
 }
-
-/* Checkbox size */
+/* Size and color for checkboxes */
 .check-item input,
 .skills-grid input {
     width: 18px;
@@ -460,7 +468,7 @@ body {
     accent-color: var(--primary);
 }
 
-/* Result card */
+/* Result card showing readiness percentage */
 .result-card {
     padding: 34px;
     display: flex;
@@ -468,7 +476,7 @@ body {
     justify-content: center;
     text-align: center;
 }
-
+/* Small result label */
 .result-label {
     color: var(--muted);
     font-weight: 800;
@@ -476,12 +484,12 @@ body {
     font-size: 13px;
     letter-spacing: 1px;
 }
-
+/* Large readiness percentage */
 .result-card h2 {
     font-size: 70px;
     margin: 8px 0 18px;
 }
-
+/* Larger progress bar in result card */
 .large-progress {
     height: 16px;
     margin-bottom: 22px;
@@ -490,6 +498,7 @@ body {
 /* =====================================
    SKILLS TRACKER
    ===================================== */
+/* Two-column layout for skill selector and summary */
 .skills-layout {
     grid-template-columns: 1fr 1fr;
 }
@@ -501,7 +510,7 @@ body {
     gap: 14px;
     margin-top: 18px;
 }
-
+/* Skill checkbox card item */
 .skills-grid label {
     background: #f8fafc;
     border: 1px solid var(--border);
@@ -513,6 +522,7 @@ body {
     gap: 10px;
 }
 
+/* Muted text style for descriptions */
 .muted-text {
     color: var(--muted);
     margin-top: 18px;
@@ -541,12 +551,12 @@ body {
     background: rgba(239, 68, 68, 0.10);
     color: var(--danger);
 }
-
+/* Empty state text */
 .empty-text {
     color: var(--muted);
     font-style: italic;
 }
-
+/* Adds extra top margin when needed */
 .top-space {
     margin-top: 26px;
 }
@@ -554,7 +564,7 @@ body {
 .career-skills-group {
     margin-bottom: 24px;
 }
-
+/* Career group title */
 .career-skills-group h4 {
     margin-bottom: 12px;
     font-size: 17px;
@@ -569,20 +579,20 @@ body {
 /* =====================================
    SKILL SUMMARY TABS
    ===================================== */
-
+/* Skill summary stays visible while scrolling on larger screens */
 .skill-summary-card {
     align-self: start;
     position: sticky;
     top: 110px;
 }
 
-/* Buttons */
+/* Container for selected/missing skill buttons */
 .summary-buttons {
     display: flex;
     gap: 10px;
     margin: 18px 0 22px;
 }
-
+/* Button for skill summary tabs */
 .summary-btn {
     border: 1px solid var(--border);
     background: #f8fafc;
@@ -594,11 +604,11 @@ body {
     transition: 0.25s;
     font-size: 14px;
 }
-
+/* Hover effect for summary buttons */
 .summary-btn:hover {
     transform: translateY(-2px);
 }
-
+/* Active summary tab button */
 .active-summary {
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: white;
@@ -609,7 +619,7 @@ body {
 .summary-content {
     display: block;
 }
-
+/* Hidden summary content */
 .hidden-summary {
     display: none;
 }
@@ -618,26 +628,26 @@ body {
 .summary-group {
     margin-bottom: 20px;
 }
-
+/* Summary category title */
 .summary-group h4 {
     margin-bottom: 10px;
     font-size: 15px;
     color: var(--dark);
 }
 
-/* Better tag spacing */
+/* Smaller spacing for tags inside summary groups */
 .summary-group .tag-container {
     margin-top: 6px;
 }
 
-/* Better empty state */
+/* Empty message inside summary */
 .empty-text {
     color: var(--muted);
     font-style: italic;
     font-size: 14px;
 }
 
-/* Better mobile layout */
+/* On tablets and smaller screens, summary card stops being sticky */
 @media (max-width: 980px) {
     .skill-summary-card {
         position: static;
@@ -742,7 +752,7 @@ body {
     gap: 8px;
     margin-bottom: 18px;
 }
-
+/* Details text inside internship card */
 .internship-details p {
     color: var(--dark-soft);
     font-size: 14px;
@@ -765,12 +775,12 @@ body {
     font-weight: 900;
     transition: 0.25s;
 }
-
+/* Save button style */
 .save-btn {
     color: var(--primary-dark);
     background: rgba(99, 102, 241, 0.12);
 }
-
+/* Apply button style */
 .apply-btn {
     color: white;
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -781,7 +791,7 @@ body {
     margin-top: 28px;
     padding: 28px;
 }
-
+/* Saved internships tag list */
 .saved-list {
     display: flex;
     flex-wrap: wrap;
@@ -816,11 +826,12 @@ body {
 /* =====================================
    INTERVIEW ACCORDION
    ===================================== */
+/* Accordion width and center alignment */
 .accordion {
     max-width: 800px;
     margin: auto;
 }
-
+/* Each accordion question block */
 .accordion-item {
     background: white;
     border: 1px solid var(--border);
@@ -829,7 +840,7 @@ body {
     overflow: hidden;
     box-shadow: var(--soft-shadow);
 }
-
+/* Accordion question button */
 .accordion-item button {
     width: 100%;
     text-align: left;
@@ -857,6 +868,7 @@ body {
 /* =====================================
    FOOTER
    ===================================== */
+/* Footer text at the bottom of the page */
 .footer {
     max-width: 1180px;
     margin: 30px auto;
@@ -868,6 +880,7 @@ body {
 /* =====================================
    RESPONSIVE DESIGN
    ===================================== */
+/* Tablet layout adjustments */
 @media (max-width: 980px) {
     .nav-container {
         border-radius: 24px;
@@ -889,7 +902,7 @@ body {
         grid-template-columns: 1fr;
     }
 }
-
+/* Mobile layout adjustments */
 @media (max-width: 640px) {
     .site-header {
         padding: 10px;
@@ -940,7 +953,7 @@ body {
     gap: 22px;
     margin-bottom: 34px;
 }
-
+/* Roadmap menu card style */
 .roadmap-menu-card {
     text-decoration: none;
     background: white;
@@ -951,24 +964,24 @@ body {
     color: var(--dark);
     transition: 0.3s ease;
 }
-
+/* Hover effect for roadmap menu cards */
 .roadmap-menu-card:hover {
     transform: translateY(-6px);
     border-color: rgba(79, 70, 229, 0.35);
 }
-
+/* Roadmap icon */
 .roadmap-menu-card span {
     display: block;
     font-size: 34px;
     margin-bottom: 12px;
 }
-
+/* Roadmap title */
 .roadmap-menu-card strong {
     display: block;
     font-size: 19px;
     margin-bottom: 8px;
 }
-
+/* Roadmap short description */
 .roadmap-menu-card small {
     color: var(--muted);
     line-height: 1.6;
@@ -983,7 +996,7 @@ body {
     margin-bottom: 26px;
     box-shadow: var(--soft-shadow);
 }
-
+/* Header inside each roadmap card */
 .roadmap-header {
     display: flex;
     justify-content: space-between;
@@ -991,12 +1004,12 @@ body {
     align-items: center;
     margin-bottom: 28px;
 }
-
+/* Roadmap card title */
 .roadmap-header h3 {
     font-size: 26px;
     color: var(--dark);
 }
-
+/* Small flowchart label */
 .roadmap-label {
     display: inline-block;
     color: var(--primary);
@@ -1007,7 +1020,7 @@ body {
     font-weight: 800;
     margin-bottom: 8px;
 }
-
+/* Button link to external roadmap resources */
 .resource-button {
     text-decoration: none;
     background: var(--primary);
@@ -1025,11 +1038,11 @@ body {
     align-items: stretch;
     gap: 12px;
 }
-
+/* Four-step compact flowchart layout */
 .compact-flowchart {
     grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
 }
-
+/* Individual flowchart step card */
 .flow-step {
     background: linear-gradient(180deg, #ffffff, #f8fafc);
     border: 1px solid var(--border);
@@ -1037,7 +1050,7 @@ body {
     padding: 20px;
     min-height: 160px;
 }
-
+/* Step number circle */
 .step-number {
     display: inline-flex;
     width: 32px;
@@ -1050,18 +1063,18 @@ body {
     font-weight: 900;
     margin-bottom: 12px;
 }
-
+/* Flowchart step heading */
 .flow-step h4 {
     margin-bottom: 10px;
     color: var(--dark);
 }
-
+/* Flowchart step description */
 .flow-step p {
     color: var(--muted);
     line-height: 1.6;
     font-size: 14px;
 }
-
+/* Arrow between flowchart steps */
 .flow-arrow {
     display: flex;
     align-items: center;
@@ -1079,20 +1092,20 @@ body {
     padding: 28px;
     box-shadow: var(--soft-shadow);
 }
-
+/* Learning resources heading */
 .resources-box h3 {
     font-size: 24px;
     color: var(--dark);
     margin-bottom: 8px;
 }
-
+/* Grid for learning resource links */
 .resource-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     margin-top: 20px;
 }
-
+/* Individual resource link */
 .resource-grid a {
     text-decoration: none;
     color: var(--dark);
@@ -1103,7 +1116,7 @@ body {
     font-weight: 800;
     transition: 0.3s ease;
 }
-
+/* Resource link hover effect */
 .resource-grid a:hover {
     background: rgba(79, 70, 229, 0.08);
     color: var(--primary);
@@ -1132,6 +1145,8 @@ body {
     }
 }
 /* APPLICATION POPUP MODAL */
+/* Dark background overlay behind the application popup.
+   It is hidden until JavaScript changes display. */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -1142,7 +1157,7 @@ body {
     align-items: center;
     padding: 20px;
 }
-
+/* Main white popup box */
 .modal-box {
     background: white;
     width: 100%;
@@ -1152,7 +1167,7 @@ body {
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
     position: relative;
 }
-
+/* Close button in the top-right corner of modal */
 .modal-close {
     position: absolute;
     top: 15px;
@@ -1162,13 +1177,13 @@ body {
     font-size: 30px;
     cursor: pointer;
 }
-
+/* Form label style */
 .form-label {
     display: block;
     margin-top: 15px;
     font-weight: 800;
 }
-
+/* Text inputs and textarea inside modal */
 .modal-box input,
 .modal-box textarea {
     width: 100%;
@@ -1178,23 +1193,23 @@ body {
     border: 1px solid var(--border);
     font-family: inherit;
 }
-
+/* Larger text area for motivation message */
 .modal-box textarea {
     min-height: 100px;
     resize: vertical;
 }
-
+/* Full-width submit button inside modal */
 .full-btn {
     width: 100%;
     margin-top: 20px;
 }
-
+/* Success message after application submission */
 .success-message {
     margin-top: 15px;
     color: green;
     font-weight: 800;
 }
-
+/* File input style for CV upload */
 .form-group input[type="file"] {
     width: 100%;
     padding: 10px;
