@@ -565,7 +565,15 @@ body {
 .career-skills-group .skills-grid {
     margin-top: 0;
 }
+.summary-group {
+    margin-bottom: 20px;
+}
 
+.summary-group h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: var(--dark);
+}
 /* =====================================
    INTERNSHIP OPPORTUNITIES
    ===================================== */
