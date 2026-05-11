@@ -550,6 +550,21 @@ body {
 .top-space {
     margin-top: 26px;
 }
+/* Career skill groups */
+.career-skills-group {
+    margin-bottom: 24px;
+}
+
+.career-skills-group h4 {
+    margin-bottom: 12px;
+    font-size: 17px;
+    color: var(--dark);
+}
+
+/* Smaller spacing inside grouped skill cards */
+.career-skills-group .skills-grid {
+    margin-top: 0;
+}
 
 /* =====================================
    INTERNSHIP OPPORTUNITIES
@@ -840,7 +855,7 @@ body {
 /* Menu cards for choosing a roadmap */
 .roadmap-menu {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 22px;
     margin-bottom: 34px;
 }
