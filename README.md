@@ -1,7 +1,7 @@
 # mini_project-internship
 # InternReady – Student Internship Platform
 
-InternReady is a modern internship preparation and discovery platform designed for university students.  
+InternReady is a modern internship preparation and discovery platform designed for university students, beginners looking for internships, students exploring career paths, learners who are preparing for technical interviews.  
 The website helps students evaluate their internship readiness, track important technical and soft skills, explore beginner-friendly internship opportunities, and follow structured career roadmaps.
 
 The main goal of the project is to simplify the internship preparation process for students who may not know where to begin or which skills they need to improve before applying.
@@ -108,9 +108,7 @@ InternReady solves these problems by providing a single platform for preparation
 
 ---
 
-## Future Improvements
-
-Possible future improvements include:
+## Possible future improvements include:
 - User accounts and authentication
 - Real internship database integration
 - Resume builder
