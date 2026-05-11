@@ -118,6 +118,4 @@ InternReady solves these problems by providing a single platform for preparation
 
 ---
 
-## Author
-
 Created as a university web technologies mini-project.
