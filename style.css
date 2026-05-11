@@ -1098,3 +1098,12 @@ body {
     color: green;
     font-weight: 800;
 }
+
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+    cursor: pointer;
+}
