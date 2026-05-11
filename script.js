@@ -1,9 +1,15 @@
-/* =====================================
-   INTERNREADY V2 JAVASCRIPT
-   This file adds logic and interaction to the website
-   ===================================== */
+/* INTERNREADY V2 JAVASCRIPT
+   This file adds logic and interaction to the website.
+   It controls readiness score, skills tracker, internship cards,
+   saved internships, application modal, and interview accordion.
+*/
+
+/* Stores currently selected internship for application popup */
 let selectedInternshipIndex = null;
+
+/* Stores internships where the user already clicked Apply */
 let appliedInternships = [];
+
 /* List of all important skills for the skill tracker */
 const allSkills = [
     "HTML", "CSS", "JavaScript", "GitHub",
@@ -13,155 +19,110 @@ const allSkills = [
     "Communication", "Teamwork"
 ];
 
-/* Internship data.
-   In a real project, this data could come from a database.
-   For this front-end prototype, we store opportunities in an array.
+/* 
+   Array of internship objects.
+   Each object stores information about one internship:
+   company, title, category, location, deadline, description,
+   requirements, and what the company offers.
 */
 const internships = [
-   {
-    company: "NovaWeb Systems",
-    title: "UI Components Intern",
-    category: "Web",
-    location: "Remote",
-    deadline: "July 8",
+    {
+        company: "NovaWeb Systems",
+        title: "UI Components Intern",
+        category: "Web",
+        location: "Remote",
+        deadline: "July 8",
+        description: "Help create reusable website components and improve responsive layouts.",
+        requirements: "Basic HTML, CSS, JavaScript, and responsive design understanding.",
+        offers: "Mentorship, portfolio projects, flexible schedule."
+    },
 
-    description:
-        "Help create reusable website components and improve responsive layouts.",
+    {
+        company: "Skyline Digital",
+        title: "Front-End Support Intern",
+        category: "Web",
+        location: "Hybrid",
+        deadline: "July 12",
+        description: "Assist developers in testing pages, fixing layout issues, and improving UI consistency.",
+        requirements: "Basic web development skills and attention to detail.",
+        offers: "Real team experience, internship certificate, training sessions."
+    },
 
-    requirements:
-        "Basic HTML, CSS, JavaScript, and responsive design understanding.",
+    {
+        company: "NetGuard Solutions",
+        title: "Junior Security Operations Intern",
+        category: "Cybersecurity",
+        location: "Remote",
+        deadline: "July 7",
+        description: "Support monitoring activities and help organize cybersecurity awareness tasks.",
+        requirements: "Interest in networking and cybersecurity basics.",
+        offers: "SOC exposure, mentorship, beginner-friendly environment."
+    },
 
-    offers:
-        "Mentorship, portfolio projects, flexible schedule."
-},
+    {
+        company: "SafeByte Technologies",
+        title: "Cyber Hygiene Intern",
+        category: "Cybersecurity",
+        location: "On-site",
+        deadline: "July 14",
+        description: "Assist with awareness campaigns, phishing simulations, and internal documentation.",
+        requirements: "Communication skills and basic security understanding.",
+        offers: "Awareness training experience, practical tasks, mentor support."
+    },
 
-{
-    company: "Skyline Digital",
-    title: "Front-End Support Intern",
-    category: "Web",
-    location: "Hybrid",
-    deadline: "July 12",
+    {
+        company: "VisionMetrics",
+        title: "Business Reporting Intern",
+        category: "Data",
+        location: "Hybrid",
+        deadline: "July 9",
+        description: "Assist in preparing charts, summaries, and simple analytical reports.",
+        requirements: "Excel knowledge and analytical thinking.",
+        offers: "Dashboard practice, teamwork experience, mentor guidance."
+    },
 
-    description:
-        "Assist developers in testing pages, fixing layout issues, and improving UI consistency.",
+    {
+        company: "DataCore Analytics",
+        title: "Junior Data Visualization Intern",
+        category: "Data",
+        location: "Remote",
+        deadline: "July 15",
+        description: "Help convert raw data into understandable dashboards and visual reports.",
+        requirements: "Basic SQL or spreadsheet knowledge.",
+        offers: "Visualization practice, flexible schedule, internship certificate."
+    },
 
-    requirements:
-        "Basic web development skills and attention to detail.",
+    {
+        company: "CreativeFlow Studio",
+        title: "UI Prototype Intern",
+        category: "Design",
+        location: "Remote",
+        deadline: "July 10",
+        description: "Assist in designing application layouts and interactive prototypes.",
+        requirements: "Basic Figma and design principles knowledge.",
+        offers: "Portfolio projects, design feedback, creative mentorship."
+    },
 
-    offers:
-        "Real team experience, internship certificate, training sessions."
-},{
-    company: "NetGuard Solutions",
-    title: "Junior Security Operations Intern",
-    category: "Cybersecurity",
-    location: "Remote",
-    deadline: "July 7",
+    {
+        company: "PixelWave Agency",
+        title: "UX Research Assistant Intern",
+        category: "Design",
+        location: "Hybrid",
+        deadline: "July 16",
+        description: "Support user testing sessions and help organize usability feedback.",
+        requirements: "Interest in UI/UX and communication skills.",
+        offers: "Real UX workflow exposure, collaborative environment, mentor support."
+    },
 
-    description:
-        "Support monitoring activities and help organize cybersecurity awareness tasks.",
-
-    requirements:
-        "Interest in networking and cybersecurity basics.",
-
-    offers:
-        "SOC exposure, mentorship, beginner-friendly environment."
-},
-
-{
-    company: "SafeByte Technologies",
-    title: "Cyber Hygiene Intern",
-    category: "Cybersecurity",
-    location: "On-site",
-    deadline: "July 14",
-
-    description:
-        "Assist with awareness campaigns, phishing simulations, and internal documentation.",
-
-    requirements:
-        "Communication skills and basic security understanding.",
-
-    offers:
-        "Awareness training experience, practical tasks, mentor support."
-},{
-    company: "VisionMetrics",
-    title: "Business Reporting Intern",
-    category: "Data",
-    location: "Hybrid",
-    deadline: "July 9",
-
-    description:
-        "Assist in preparing charts, summaries, and simple analytical reports.",
-
-    requirements:
-        "Excel knowledge and analytical thinking.",
-
-    offers:
-        "Dashboard practice, teamwork experience, mentor guidance."
-},
-
-{
-    company: "DataCore Analytics",
-    title: "Junior Data Visualization Intern",
-    category: "Data",
-    location: "Remote",
-    deadline: "July 15",
-
-    description:
-        "Help convert raw data into understandable dashboards and visual reports.",
-
-    requirements:
-        "Basic SQL or spreadsheet knowledge.",
-
-    offers:
-        "Visualization practice, flexible schedule, internship certificate."
-},{
-    company: "CreativeFlow Studio",
-    title: "UI Prototype Intern",
-    category: "Design",
-    location: "Remote",
-    deadline: "July 10",
-
-    description:
-        "Assist in designing application layouts and interactive prototypes.",
-
-    requirements:
-        "Basic Figma and design principles knowledge.",
-
-    offers:
-        "Portfolio projects, design feedback, creative mentorship."
-},
-
-{
-    company: "PixelWave Agency",
-    title: "UX Research Assistant Intern",
-    category: "Design",
-    location: "Hybrid",
-    deadline: "July 16",
-
-    description:
-        "Support user testing sessions and help organize usability feedback.",
-
-    requirements:
-        "Interest in UI/UX and communication skills.",
-
-    offers:
-        "Real UX workflow exposure, collaborative environment, mentor support."
-},
     {
         company: "BrightWeb Studio",
         title: "Front-End Developer Intern",
         category: "Web",
         location: "Remote",
         deadline: "June 10",
-
-        description:
-            "Assist in building responsive web pages and interactive UI components.",
-
-        requirements:
-            "Basic HTML, CSS, JavaScript, and GitHub knowledge.",
-
-        offers:
-            "Mentorship, portfolio experience, flexible schedule."
+        description: "Assist in building responsive web pages and interactive UI components.",
+        requirements: "Basic HTML, CSS, JavaScript, and GitHub knowledge.",
+        offers: "Mentorship, portfolio experience, flexible schedule."
     },
 
     {
@@ -170,20 +131,15 @@ const internships = [
         category: "Cybersecurity",
         location: "Hybrid",
         deadline: "June 18",
-
-        description:
-            "Assist in monitoring alerts and preparing awareness materials for internal users.",
-
-        requirements:
-            "Basic networking knowledge and cybersecurity interest.",
-
-        offers:
-            "SIEM exposure, mentorship, beginner SOC experience."
+        description: "Assist in monitoring alerts and preparing awareness materials for internal users.",
+        requirements: "Basic networking knowledge and cybersecurity interest.",
+        offers: "SIEM exposure, mentorship, beginner SOC experience."
     }
 ];
 
 /* This array stores saved internships */
 let savedInternships = [];
+
 
 /* =====================================
    READINESS CHECKER LOGIC
@@ -204,6 +160,7 @@ function updateReadinessScore() {
     /* Add value of each checked item */
     readinessChecks.forEach(function (checkbox) {
         if (checkbox.checked) {
+            /* Number() converts checkbox value from text to number */
             score += Number(checkbox.value);
         }
     });
@@ -213,11 +170,11 @@ function updateReadinessScore() {
         score = 100;
     }
 
-    /* Update score text */
+    /* Update score text in readiness section and hero panel */
     document.getElementById("readiness-score").textContent = score;
     document.getElementById("hero-score").textContent = score;
 
-    /* Update progress bars */
+    /* Dynamically changes progress bar width */
     document.getElementById("readiness-progress").style.width = score + "%";
     document.getElementById("hero-progress").style.width = score + "%";
 
@@ -225,13 +182,17 @@ function updateReadinessScore() {
     const message = document.getElementById("readiness-message");
 
     if (score < 40) {
-        message.textContent = "You are at the beginning stage. Focus on CV, basic skills, and one project.";
+        message.textContent =
+            "You are at the beginning stage. Focus on CV, basic skills, and one project.";
     } else if (score < 75) {
-        message.textContent = "Good progress. Improve missing areas and start browsing suitable internships.";
+        message.textContent =
+            "Good progress. Improve missing areas and start browsing suitable internships.";
     } else {
-        message.textContent = "Great! You look close to internship-ready. Keep practicing interviews and applying.";
+        message.textContent =
+            "Great! You look close to internship-ready. Keep practicing interviews and applying.";
     }
 }
+
 
 /* =====================================
    SKILLS TRACKER LOGIC
@@ -246,9 +207,7 @@ skillChecks.forEach(function (checkbox) {
 });
 
 /* This function updates selected and missing skills */
-/* This function updates selected and missing skills */
 function updateSkills() {
-
     let selectedSkills = [];
 
     /* Collect selected skills */
@@ -262,123 +221,86 @@ function updateSkills() {
     document.getElementById("hero-skill-count").textContent =
         selectedSkills.length;
 
-    /* Career groups */
+    /* 
+       Skills are grouped by career category.
+       This helps organize selected and missing skills separately.
+    */
     const careerGroups = {
+        web: ["HTML", "CSS", "JavaScript", "GitHub"],
 
-        web: [
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "GitHub"
-        ],
+        data: ["Excel", "SQL", "Python", "Data Visualization"],
 
-        data: [
-            "Excel",
-            "SQL",
-            "Python",
-            "Data Visualization"
-        ],
+        cyber: ["Networking", "Linux", "Security Basics", "Risk Awareness"],
 
-        cyber: [
-            "Networking",
-            "Linux",
-            "Security Basics",
-            "Risk Awareness"
-        ],
+        design: ["Figma", "Wireframing", "Typography", "UX Research"],
 
-        design: [
-            "Figma",
-            "Wireframing",
-            "Typography",
-            "UX Research"
-        ],
-
-        soft: [
-            "Communication",
-            "Teamwork"
-        ]
+        soft: ["Communication", "Teamwork"]
     };
 
-    /* Update each category */
+    /* Update selected and missing skills for each category */
     for (const group in careerGroups) {
+        const selected = careerGroups[group].filter(function (skill) {
+            return selectedSkills.includes(skill);
+        });
 
-        const selected = careerGroups[group].filter(skill =>
-            selectedSkills.includes(skill)
-        );
+        const missing = careerGroups[group].filter(function (skill) {
+            return !selectedSkills.includes(skill);
+        });
 
-        const missing = careerGroups[group].filter(skill =>
-            !selectedSkills.includes(skill)
-        );
-
-        showTags(`${group}-selected`, selected, false);
-
-        showTags(`${group}-missing`, missing, true);
+        showTags(group + "-selected", selected, false);
+        showTags(group + "-missing", missing, true);
     }
 }
-/* Toggle between selected and missing summaries */
+
+/* Toggle between selected and missing skill summaries */
 function showSkillSummary(type) {
+    const selectedSummary = document.getElementById("selected-summary");
+    const missingSummary = document.getElementById("missing-summary");
+    const buttons = document.querySelectorAll(".summary-btn");
 
-    const selectedSummary =
-        document.getElementById("selected-summary");
-
-    const missingSummary =
-        document.getElementById("missing-summary");
-
-    const buttons =
-        document.querySelectorAll(".summary-btn");
-
-    buttons.forEach(function(button) {
+    /* Remove active style from all summary buttons */
+    buttons.forEach(function (button) {
         button.classList.remove("active-summary");
     });
 
     if (type === "selected") {
-
         selectedSummary.classList.remove("hidden-summary");
-
         missingSummary.classList.add("hidden-summary");
 
         buttons[0].classList.add("active-summary");
-
     } else {
-
         missingSummary.classList.remove("hidden-summary");
-
         selectedSummary.classList.add("hidden-summary");
 
         buttons[1].classList.add("active-summary");
     }
 }
+
 /* This helper function displays skill tags */
 function showTags(containerId, items, isMissing) {
-
-    const container =
-        document.getElementById(containerId);
+    const container = document.getElementById(containerId);
 
     container.innerHTML = "";
 
     /* Empty state */
     if (items.length === 0) {
-
         container.innerHTML =
             '<span class="empty-text">Nothing to show.</span>';
-
         return;
     }
 
-    /* Create tags */
-    items.forEach(function(item) {
+    /* Create HTML tag element for every skill */
+    items.forEach(function (item) {
+        const tag = document.createElement("span");
 
-        const tag =
-            document.createElement("span");
-
-        tag.className =
-            isMissing ? "tag missing" : "tag";
-
+        tag.className = isMissing ? "tag missing" : "tag";
         tag.textContent = item;
 
         container.appendChild(tag);
     });
 }
+
+
 /* =====================================
    INTERNSHIP OPPORTUNITIES LOGIC
    ===================================== */
@@ -406,7 +328,10 @@ function renderInternships(category) {
         const card = document.createElement("div");
         card.className = "internship-card";
 
-        /* The card content is inserted with template literal */
+        /* 
+           Template literal creates internship card dynamically.
+           JavaScript inserts internship data directly into HTML.
+        */
         card.innerHTML = `
             <div class="internship-top">
                 <div class="company-logo">${getInitials(internship.company)}</div>
@@ -444,12 +369,13 @@ function filterInternships(category) {
     /* Render filtered cards */
     renderInternships(category);
 
-    /* Update active filter button */
     const filterButtons = document.querySelectorAll(".filter-btn");
 
+    /* Remove active style from all filter buttons */
     filterButtons.forEach(function (button) {
         button.classList.remove("active-filter");
 
+        /* Add active style to selected category button */
         if (button.dataset.category === category) {
             button.classList.add("active-filter");
         }
@@ -462,7 +388,8 @@ function saveInternship(index) {
 
     /* Avoid saving the same internship twice */
     const alreadySaved = savedInternships.some(function (saved) {
-        return saved.company === internship.company && saved.title === internship.title;
+        return saved.company === internship.company &&
+               saved.title === internship.title;
     });
 
     if (alreadySaved) {
@@ -470,7 +397,9 @@ function saveInternship(index) {
         return;
     }
 
+    /* Add selected internship to saved list */
     savedInternships.push(internship);
+
     renderSavedInternships();
 }
 
@@ -482,11 +411,13 @@ function renderSavedInternships() {
     savedList.innerHTML = "";
 
     /* Update hero saved count */
-    document.getElementById("hero-saved-count").textContent = savedInternships.length;
+    document.getElementById("hero-saved-count").textContent =
+        savedInternships.length;
 
     /* Show empty message if nothing is saved */
     if (savedInternships.length === 0) {
-        savedList.innerHTML = '<span class="empty-text">No internships saved yet.</span>';
+        savedList.innerHTML =
+            '<span class="empty-text">No internships saved yet.</span>';
         return;
     }
 
@@ -511,20 +442,27 @@ function removeSavedInternship(index) {
 }
 
 
+/* =====================================
+   APPLICATION MODAL LOGIC
+   ===================================== */
+
 /* Opens application form modal */
 function openApplyModal(index) {
     selectedInternshipIndex = index;
 
     const internship = internships[index];
 
+    /* Show selected internship title inside popup */
     document.getElementById("modal-job-title").textContent =
         internship.title + " at " + internship.company;
 
+    /* Clear old form data */
     document.getElementById("applicant-name").value = "";
     document.getElementById("applicant-email").value = "";
     document.getElementById("applicant-message").value = "";
     document.getElementById("application-success").textContent = "";
 
+    /* Display popup modal window */
     document.getElementById("apply-modal").style.display = "flex";
 }
 
@@ -539,24 +477,30 @@ function submitApplication() {
     const email = document.getElementById("applicant-email").value.trim();
     const message = document.getElementById("applicant-message").value.trim();
 
+    /* Simple validation */
     if (name === "" || email === "" || message === "") {
         alert("Please fill in all fields.");
         return;
     }
 
+    /* Save applied internship index to prevent duplicate applications */
     appliedInternships.push(selectedInternshipIndex);
 
     document.getElementById("application-success").textContent =
         "Application submitted successfully!";
 
+    /* Re-render internship cards so Apply button becomes Applied */
     renderInternships("All");
 
+    /* Close popup after short delay */
     setTimeout(function () {
         closeApplyModal();
     }, 1000);
 }
+
 /* This helper function creates company initials for the logo circle */
 function getInitials(companyName) {
+    /* Convert company name into initials for logo circle */
     return companyName
         .split(" ")
         .map(function (word) {
@@ -567,6 +511,7 @@ function getInitials(companyName) {
         .toUpperCase();
 }
 
+
 /* =====================================
    INTERVIEW PREP LOGIC
    ===================================== */
@@ -574,14 +519,25 @@ function getInitials(companyName) {
 /* This function opens or closes interview tips */
 function toggleTip(index) {
     const tips = document.querySelectorAll(".tip-text");
+
+    /* Toggle show class to open or close answer */
     tips[index].classList.toggle("show");
 }
+
 
 /* =====================================
    INITIAL PAGE SETUP
    Runs when page first loads
    ===================================== */
+
+/* Initialize readiness score */
 updateReadinessScore();
+
+/* Initialize skills summary */
 updateSkills();
+
+/* Show all internships by default */
 renderInternships("All");
+
+/* Initialize saved internship list */
 renderSavedInternships();
