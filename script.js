@@ -6,14 +6,11 @@ let selectedInternshipIndex = null;
 let appliedInternships = [];
 /* List of all important skills for the skill tracker */
 const allSkills = [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "GitHub",
-    "SQL",
-    "Python",
-    "Communication",
-    "Teamwork"
+    "HTML", "CSS", "JavaScript", "GitHub",
+    "Excel", "SQL", "Python", "Data Visualization",
+    "Networking", "Linux", "Security Basics", "Risk Awareness",
+    "Figma", "Wireframing", "Typography", "UX Research",
+    "Communication", "Teamwork"
 ];
 
 /* Internship data.
