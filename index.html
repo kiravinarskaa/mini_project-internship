@@ -11,10 +11,12 @@
 </head>
 <body>
 
-    <!-- HEADER / NAVIGATION -->
+    <!-- HEADER / NAVIGATION
+    This part stays at the top of the website.
+         It contains the logo, navigation menu, and button.-->
     <header class="site-header">
         <div class="nav-container">
-            <!-- Project logo -->
+            <!-- Project logo. When clicked, it returns user to Home section. -->
             <a href="#home" class="logo">
                 <span class="logo-icon">IR</span>
                 <span>InternReady</span>
@@ -35,7 +37,9 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION 
+    This is the first section users see.
+         It introduces the purpose of the platform. -->-->
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-badge">Internship Platform for University Students</div>
@@ -48,28 +52,34 @@
                 and prepare for interviews.
             </p>
 
+            <!-- Buttons that take users to important sections -->
             <div class="hero-actions">
                 <a href="#checker" class="primary-btn">Check My Readiness</a>
                 <a href="#opportunities" class="secondary-btn">Browse Internships</a>
             </div>
         </div>
 
-        <!-- Hero dashboard preview -->
+        <!-- Hero dashboard preview
+        JavaScript updates the score, progress bar, selected skills, and saved internships. -->-->
         <div class="hero-panel">
+              <!-- Decorative panel header dots -->
             <div class="panel-header">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
 
+              <!-- Readiness score preview -->
             <div class="score-preview">
                 <p>Readiness Score</p>
                 <h2><span id="hero-score">0</span>%</h2>
+                  <!-- Progress bar for readiness score -->
                 <div class="progress-bar">
                     <div class="progress-fill" id="hero-progress"></div>
                 </div>
             </div>
 
+               <!-- Small statistics in the hero panel -->
             <div class="mini-stats">
                 <div>
                     <strong id="hero-skill-count">0</strong>
@@ -83,7 +93,8 @@
         </div>
     </section>
 
-    <!-- PROBLEM AND SOLUTION SECTION -->
+    <!-- PROBLEM AND SOLUTION SECTION 
+     Explains what problem the project solves. -->
     <section class="section">
         <div class="section-title">
             <span>Problem & Solution</span>
@@ -94,19 +105,24 @@
             </p>
         </div>
 
+          <!-- Three cards explaining the main benefits of the platform -->
         <div class="card-grid">
+
+             <!-- Card 1 -->
             <div class="info-card">
                 <div class="card-icon">🎯</div>
                 <h3>Clear Direction</h3>
                 <p>Students can see what they need before applying for internships.</p>
             </div>
 
+              <!-- Card 2 -->
             <div class="info-card">
                 <div class="card-icon">🧭</div>
                 <h3>Opportunity Discovery</h3>
                 <p>Students can browse internships by category, location, and requirements.</p>
             </div>
 
+               <!-- Card 3 -->
             <div class="info-card">
                 <div class="card-icon">🚀</div>
                 <h3>Career Preparation</h3>
@@ -115,7 +131,9 @@
         </div>
     </section>
 
-    <!-- READINESS CHECKER SECTION -->
+    <!-- READINESS CHECKER SECTION
+     Users select completed preparation steps.
+         JavaScript calculates the readiness percentage. -->
     <section class="section split-section" id="checker">
         <div class="section-title left-title">
             <span>Readiness Checker</span>
@@ -259,6 +277,7 @@
         <div class="glass-card skill-summary-card">
             <h3>Skill Summary</h3>
 
+             <!-- Buttons for switching between selected and missing skills -->
             <div class="summary-buttons">
                 <button class="summary-btn active-summary" onclick="showSkillSummary('selected')">
                     Selected Skills
@@ -269,6 +288,7 @@
                 </button>
             </div>
 
+            <!-- Selected skills output -->
             <div id="selected-summary" class="summary-content">
                 <div class="summary-group">
                     <h4>💻 Web Development</h4>
@@ -296,6 +316,8 @@
                 </div>
             </div>
 
+             <!-- Missing skills output.
+                     Hidden by default using CSS class hidden-summary. -->
             <div id="missing-summary" class="summary-content hidden-summary">
                 <div class="summary-group">
                     <h4>💻 Web Development</h4>
