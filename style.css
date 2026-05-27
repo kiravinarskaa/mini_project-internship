@@ -768,7 +768,8 @@ body {
 /* Save and apply buttons */
 .save-btn,
 .saved-btn,
-.apply-btn {
+.apply-btn,
+.applied-btn {
     border: none;
     cursor: pointer;
     border-radius: 999px;
