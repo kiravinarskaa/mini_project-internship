@@ -37,26 +37,39 @@ module.exports = async (req, res) => {
     // Insert default internship
     if (rows.length === 0) {
       await pool.query(`
-        INSERT INTO internships
-        (company, title, category, location, deadline, description, requirements, offers)
-        VALUES
-        (
-          'TechNova',
-          'Frontend Intern',
-          'Web',
-          'Remote',
-          '2026-06-20',
-          'Assist in UI development',
-          'HTML, CSS, JavaScript',
-          'Mentorship and certificate'
-        )
+         INSERT INTO internships
+    (company, title, category, location, deadline, description, requirements, offers)
+    VALUES
+    ('TechNova', 'Frontend Intern', 'Web', 'Remote', '2026-06-20',
+    'Assist in UI development and improve website pages.',
+    'HTML, CSS, JavaScript basics',
+    'Mentorship, certificate, portfolio experience'),
+
+    ('DataBridge', 'Data Analyst Intern', 'Data', 'Remote', '2026-07-05',
+    'Support data cleaning, Excel reports, and simple dashboard preparation.',
+    'Excel, SQL basics, attention to detail',
+    'Training, real reporting tasks, recommendation letter'),
+
+    ('CyberShield', 'Cybersecurity Awareness Intern', 'Cybersecurity', 'Hybrid', '2026-07-15',
+    'Help prepare cybersecurity awareness materials and phishing prevention content.',
+    'Security basics, communication skills, interest in cyber hygiene',
+    'Mentorship, awareness project experience, certificate'),
+
+    ('DesignFlow', 'UI/UX Design Intern', 'Design', 'Remote', '2026-06-30',
+    'Create wireframes, improve layouts, and support user interface design.',
+    'Figma basics, creativity, understanding of layout',
+    'Portfolio case study, feedback sessions, certificate'),
+
+    ('WebNest', 'Junior Web Intern', 'Web', 'On-site', '2026-08-01',
+    'Build simple landing pages and update website content.',
+    'HTML, CSS, GitHub basics',
+    'Team experience, code review, internship certificate');
       `);
     }
 
     // Return internships
-    const [internships] = await pool.query(
-      "SELECT * FROM internships"
-    );
+    await pool.query("DELETE FROM internships");
+    const [rows] = await pool.query("SELECT * FROM internships");
 
     res.status(200).json(internships);
 
