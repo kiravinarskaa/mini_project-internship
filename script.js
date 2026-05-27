@@ -364,30 +364,27 @@ function submitApplication() {
     document.getElementById("email-error").textContent = "";
     document.getElementById("cv-error").textContent = "";
     document.getElementById("message-error").textContent = "";
+    document.getElementById("application-success").textContent = "";
 
     let isValid = true;
 
     if (name === "") {
-        document.getElementById("name-error").textContent =
-            "Full name is required.";
+        document.getElementById("name-error").textContent = "Full name is required.";
         isValid = false;
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (email === "") {
-        document.getElementById("email-error").textContent =
-            "Email is required.";
+        document.getElementById("email-error").textContent = "Email is required.";
         isValid = false;
     } else if (!emailPattern.test(email)) {
-        document.getElementById("email-error").textContent =
-            "Enter a valid email address.";
+        document.getElementById("email-error").textContent = "Enter a valid email address.";
         isValid = false;
     }
 
     if (!cv) {
-        document.getElementById("cv-error").textContent =
-            "Please upload your CV.";
+        document.getElementById("cv-error").textContent = "Please upload your CV.";
         isValid = false;
     } else {
         const allowedFileTypes = [
@@ -397,15 +394,13 @@ function submitApplication() {
         ];
 
         if (!allowedFileTypes.includes(cv.type)) {
-            document.getElementById("cv-error").textContent =
-                "Only PDF or Word files are allowed.";
+            document.getElementById("cv-error").textContent = "Only PDF or Word files are allowed.";
             isValid = false;
         }
     }
 
     if (message === "") {
-        document.getElementById("message-error").textContent =
-            "Short motivation is required.";
+        document.getElementById("message-error").textContent = "Short motivation is required.";
         isValid = false;
     }
 
@@ -415,26 +410,27 @@ function submitApplication() {
 
     const internship = internships[selectedInternshipIndex];
 
-/* Send application to backend API */
-fetch("/api/applications", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
+    fetch("/api/applications", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            internship_id: internship.id,
+            student_name: name,
+            email: email,
+            cv_file_name: cv.name,
+            motivation: message
+        })
+    })
+    .then(function (response) {
+        if (!response.ok) {
+            throw new Error("Application was not saved.");
+        }
 
-    body: JSON.stringify({
-        internship_id: internship.id,
-        student_name: name,
-        email: email,
-        cv_file_name: cv.name,
-        motivation: message
-    })
-    })
-    .then(function(response) {
         return response.json();
     })
-    .then(function(data) {
-
+    .then(function () {
         appliedInternships.push(selectedInternshipIndex);
 
         document.getElementById("application-success").textContent =
@@ -444,17 +440,15 @@ fetch("/api/applications", {
 
         setTimeout(function () {
             closeApplyModal();
-        }, 1000);
+        }, 1200);
+    })
+    .catch(function (error) {
+        console.log("Application error:", error);
 
-})
-.catch(function(error) {
-
-    console.log("Application error:", error);
-
-    document.getElementById("application-success").textContent =
-        "Failed to submit application.";
-
-});
+        document.getElementById("application-success").style.color = "red";
+        document.getElementById("application-success").textContent =
+            "Application could not be saved. Please try again.";
+    });
 }
 
 
