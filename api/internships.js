@@ -11,24 +11,20 @@ const pool = mysql.createPool({
 
 module.exports = async (req, res) => {
   try {
+    await pool.query("DELETE FROM internships");
+
     await pool.query(`
-      CREATE TABLE IF NOT EXISTS internships (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        company VARCHAR(100),
-        title VARCHAR(100),
-        category VARCHAR(50),
-        location VARCHAR(100),
-        deadline DATE,
-        description TEXT,
-        requirements TEXT,
-        offers TEXT
-      )
+      INSERT INTO internships
+      (company, title, category, location, deadline, description, requirements, offers)
+      VALUES
+      ('TechNova', 'Frontend Intern', 'Web', 'Remote', '2026-06-20', 'Assist in UI development.', 'HTML, CSS, JavaScript', 'Mentorship and certificate'),
+      ('DataBridge', 'Data Analyst Intern', 'Data', 'Remote', '2026-07-05', 'Support data cleaning and reports.', 'Excel, SQL basics', 'Training and real reporting tasks'),
+      ('CyberShield', 'Cybersecurity Intern', 'Cybersecurity', 'Hybrid', '2026-07-15', 'Help prepare security awareness materials.', 'Security basics and communication', 'Mentorship and certificate'),
+      ('DesignFlow', 'UI/UX Design Intern', 'Design', 'Remote', '2026-06-30', 'Create wireframes and improve layouts.', 'Figma basics', 'Portfolio case study'),
+      ('WebNest', 'Junior Web Intern', 'Web', 'On-site', '2026-08-01', 'Build simple landing pages.', 'HTML, CSS, GitHub', 'Code review and certificate')
     `);
 
-    const [rows] = await pool.query("SELECT * FROM internships");
-
-    res.status(200).json(rows);
-
+    res.status(200).json({ message: "Internships added successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
