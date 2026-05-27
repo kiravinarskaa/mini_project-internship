@@ -257,7 +257,7 @@ function renderInternships(category) {
                 <p><strong>Requirements:</strong> ${internship.requirements}</p>
                 <p><strong>What company offers:</strong> ${internship.offers}</p>
                 <p><strong>Location:</strong> ${internship.location}</p>
-                <p><strong>Deadline:</strong> ${internship.deadline}</p>
+                <p><strong>Deadline:</strong> ${new Date(internship.deadline).toLocaleDateString("en-GB")}</p>
             </div>
 
             <div class="card-actions">
