@@ -776,7 +776,7 @@ body {
     transition: 0.25s;
 }
 /* Save button style */
-.save-btn {
+.save-btn, .saved-btn {
     color: var(--primary-dark);
     background: rgba(99, 102, 241, 0.12);
 }
