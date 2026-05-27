@@ -5,12 +5,12 @@
 */
 
 
+/* Stores internships loaded from MySQL database through Vercel API */
 let internships = [];
 
+/* Loads internship data from backend API */
 async function loadInternships() {
-
     try {
-
         const response = await fetch("/api/internships");
 
         internships = await response.json();
@@ -18,9 +18,7 @@ async function loadInternships() {
         renderInternships("All");
 
     } catch (error) {
-
         console.log("Error loading internships:", error);
-
     }
 }
 
@@ -31,6 +29,10 @@ let selectedInternshipIndex = null;
 /* Stores internships where the user already clicked Apply */
 let appliedInternships = [];
 
+/* This array stores saved internships */
+let savedInternships = [];
+
+
 /* List of all important skills for the skill tracker */
 const allSkills = [
     "HTML", "CSS", "JavaScript", "GitHub",
@@ -40,26 +42,11 @@ const allSkills = [
     "Communication", "Teamwork"
 ];
 
-/* 
-   Array of internship objects.
-   Each object stores information about one internship:
-   company, title, category, location, deadline, description,
-   requirements, and what the company offers.
-*/
 
+/* READINESS CHECKER LOGIC */
 
-/* This array stores saved internships */
-let savedInternships = [];
-
-
-/* =====================================
-   READINESS CHECKER LOGIC
-   ===================================== */
-
-/* Get all readiness checklist checkboxes */
 const readinessChecks = document.querySelectorAll(".readiness-check");
 
-/* Add event listener to each readiness checkbox */
 readinessChecks.forEach(function (checkbox) {
     checkbox.addEventListener("change", updateReadinessScore);
 });
@@ -68,28 +55,22 @@ readinessChecks.forEach(function (checkbox) {
 function updateReadinessScore() {
     let score = 0;
 
-    /* Add value of each checked item */
     readinessChecks.forEach(function (checkbox) {
         if (checkbox.checked) {
-            /* Number() converts checkbox value from text to number */
             score += Number(checkbox.value);
         }
     });
 
-    /* Limit score to 100 in case values become larger */
     if (score > 100) {
         score = 100;
     }
 
-    /* Update score text in readiness section and hero panel */
     document.getElementById("readiness-score").textContent = score;
     document.getElementById("hero-score").textContent = score;
 
-    /* Dynamically changes progress bar width */
     document.getElementById("readiness-progress").style.width = score + "%";
     document.getElementById("hero-progress").style.width = score + "%";
 
-    /* Update message depending on score */
     const message = document.getElementById("readiness-message");
 
     if (score < 40) {
@@ -105,14 +86,10 @@ function updateReadinessScore() {
 }
 
 
-/* =====================================
-   SKILLS TRACKER LOGIC
-   ===================================== */
+/* SKILLS TRACKER LOGIC */
 
-/* Get all skill checkboxes */
 const skillChecks = document.querySelectorAll(".skill-check");
 
-/* Add event listener to each skill checkbox */
 skillChecks.forEach(function (checkbox) {
     checkbox.addEventListener("change", updateSkills);
 });
@@ -121,34 +98,23 @@ skillChecks.forEach(function (checkbox) {
 function updateSkills() {
     let selectedSkills = [];
 
-    /* Collect selected skills */
     skillChecks.forEach(function (checkbox) {
         if (checkbox.checked) {
             selectedSkills.push(checkbox.value);
         }
     });
 
-    /* Update hero skill number */
     document.getElementById("hero-skill-count").textContent =
         selectedSkills.length;
 
-    /* 
-       Skills are grouped by career category.
-       This helps organize selected and missing skills separately.
-    */
     const careerGroups = {
         web: ["HTML", "CSS", "JavaScript", "GitHub"],
-
         data: ["Excel", "SQL", "Python", "Data Visualization"],
-
         cyber: ["Networking", "Linux", "Security Basics", "Risk Awareness"],
-
         design: ["Figma", "Wireframing", "Typography", "UX Research"],
-
         soft: ["Communication", "Teamwork"]
     };
 
-    /* Update selected and missing skills for each category */
     for (const group in careerGroups) {
         const selected = careerGroups[group].filter(function (skill) {
             return selectedSkills.includes(skill);
@@ -169,7 +135,6 @@ function showSkillSummary(type) {
     const missingSummary = document.getElementById("missing-summary");
     const buttons = document.querySelectorAll(".summary-btn");
 
-    /* Remove active style from all summary buttons */
     buttons.forEach(function (button) {
         button.classList.remove("active-summary");
     });
@@ -177,12 +142,10 @@ function showSkillSummary(type) {
     if (type === "selected") {
         selectedSummary.classList.remove("hidden-summary");
         missingSummary.classList.add("hidden-summary");
-
         buttons[0].classList.add("active-summary");
     } else {
         missingSummary.classList.remove("hidden-summary");
         selectedSummary.classList.add("hidden-summary");
-
         buttons[1].classList.add("active-summary");
     }
 }
@@ -193,14 +156,12 @@ function showTags(containerId, items, isMissing) {
 
     container.innerHTML = "";
 
-    /* Empty state */
     if (items.length === 0) {
         container.innerHTML =
             '<span class="empty-text">Nothing to show.</span>';
         return;
     }
 
-    /* Create HTML tag element for every skill */
     items.forEach(function (item) {
         const tag = document.createElement("span");
 
@@ -212,18 +173,14 @@ function showTags(containerId, items, isMissing) {
 }
 
 
-/* =====================================
-   INTERNSHIP OPPORTUNITIES LOGIC
-   ===================================== */
+/* INTERNSHIP OPPORTUNITIES LOGIC */
 
 /* This function displays internship cards */
 function renderInternships(category) {
     const internshipList = document.getElementById("internship-list");
 
-    /* Clear old cards before adding new ones */
     internshipList.innerHTML = "";
 
-    /* Filter internships by selected category */
     let filteredInternships = internships;
 
     if (category !== "All") {
@@ -232,17 +189,18 @@ function renderInternships(category) {
         });
     }
 
-    /* Create one card for each internship */
     filteredInternships.forEach(function (internship) {
         const originalIndex = internships.indexOf(internship);
+
+        /* Check whether this internship is already saved */
+        const isSaved = savedInternships.some(function (saved) {
+            return saved.company === internship.company &&
+                   saved.title === internship.title;
+        });
 
         const card = document.createElement("div");
         card.className = "internship-card";
 
-        /* 
-           Template literal creates internship card dynamically.
-           JavaScript inserts internship data directly into HTML.
-        */
         card.innerHTML = `
             <div class="internship-top">
                 <div class="company-logo">${getInitials(internship.company)}</div>
@@ -261,7 +219,11 @@ function renderInternships(category) {
             </div>
 
             <div class="card-actions">
-                <button class="save-btn" onclick="saveInternship(${originalIndex})">Save</button>
+                ${
+                    isSaved
+                    ? `<button class="saved-btn" onclick="removeSavedInternshipByCard(${originalIndex})">Saved</button>`
+                    : `<button class="save-btn" onclick="saveInternship(${originalIndex})">Save</button>`
+                }
 
                 ${
                     appliedInternships.includes(originalIndex)
@@ -277,16 +239,13 @@ function renderInternships(category) {
 
 /* This function filters internships when user clicks category */
 function filterInternships(category) {
-    /* Render filtered cards */
     renderInternships(category);
 
     const filterButtons = document.querySelectorAll(".filter-btn");
 
-    /* Remove active style from all filter buttons */
     filterButtons.forEach(function (button) {
         button.classList.remove("active-filter");
 
-        /* Add active style to selected category button */
         if (button.dataset.category === category) {
             button.classList.add("active-filter");
         }
@@ -297,42 +256,36 @@ function filterInternships(category) {
 function saveInternship(index) {
     const internship = internships[index];
 
-    /* Avoid saving the same internship twice */
     const alreadySaved = savedInternships.some(function (saved) {
         return saved.company === internship.company &&
                saved.title === internship.title;
     });
 
     if (alreadySaved) {
-        alert("This internship is already saved.");
         return;
     }
 
-    /* Add selected internship to saved list */
     savedInternships.push(internship);
 
     renderSavedInternships();
+    renderInternships("All");
 }
 
 /* This function displays saved internships */
 function renderSavedInternships() {
     const savedList = document.getElementById("saved-list");
 
-    /* Clear previous saved list */
     savedList.innerHTML = "";
 
-    /* Update hero saved count */
     document.getElementById("hero-saved-count").textContent =
         savedInternships.length;
 
-    /* Show empty message if nothing is saved */
     if (savedInternships.length === 0) {
         savedList.innerHTML =
             '<span class="empty-text">No internships saved yet.</span>';
         return;
     }
 
-    /* Create a small saved item for each saved internship */
     savedInternships.forEach(function (internship, index) {
         const item = document.createElement("div");
         item.className = "saved-item";
@@ -346,20 +299,31 @@ function renderSavedInternships() {
     });
 }
 
-/* This function removes a saved internship */
+/* This function removes internship from saved list */
 function removeSavedInternship(index) {
     savedInternships.splice(index, 1);
+
     renderSavedInternships();
+    renderInternships("All");
+}
+
+/* This function removes saved internship by clicking the Saved button on the card */
+function removeSavedInternshipByCard(index) {
+    const internship = internships[index];
+
+    savedInternships = savedInternships.filter(function (saved) {
+        return !(
+            saved.company === internship.company &&
+            saved.title === internship.title
+        );
+    });
+
+    renderSavedInternships();
+    renderInternships("All");
 }
 
 
-/* =====================================
-   APPLICATION MODAL LOGIC
-   ===================================== */
-
-
-
-   
+/* APPLICATION MODAL LOGIC */
 
 /* Opens application form modal */
 function openApplyModal(index) {
@@ -367,17 +331,20 @@ function openApplyModal(index) {
 
     const internship = internships[index];
 
-    /* Show selected internship title inside popup */
     document.getElementById("modal-job-title").textContent =
         internship.title + " at " + internship.company;
 
-    /* Clear old form data */
     document.getElementById("applicant-name").value = "";
     document.getElementById("applicant-email").value = "";
     document.getElementById("applicant-message").value = "";
+    document.getElementById("cv").value = "";
+
+    document.getElementById("name-error").textContent = "";
+    document.getElementById("email-error").textContent = "";
+    document.getElementById("cv-error").textContent = "";
+    document.getElementById("message-error").textContent = "";
     document.getElementById("application-success").textContent = "";
 
-    /* Display popup modal window */
     document.getElementById("apply-modal").style.display = "flex";
 }
 
@@ -386,7 +353,7 @@ function closeApplyModal() {
     document.getElementById("apply-modal").style.display = "none";
 }
 
-/* Submits application form */
+/* Submits application form with inline validation */
 function submitApplication() {
     const name = document.getElementById("applicant-name").value.trim();
     const email = document.getElementById("applicant-email").value.trim();
@@ -401,22 +368,26 @@ function submitApplication() {
     let isValid = true;
 
     if (name === "") {
-        document.getElementById("name-error").textContent = "Full name is required.";
+        document.getElementById("name-error").textContent =
+            "Full name is required.";
         isValid = false;
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (email === "") {
-        document.getElementById("email-error").textContent = "Email is required.";
+        document.getElementById("email-error").textContent =
+            "Email is required.";
         isValid = false;
     } else if (!emailPattern.test(email)) {
-        document.getElementById("email-error").textContent = "Enter a valid email address.";
+        document.getElementById("email-error").textContent =
+            "Enter a valid email address.";
         isValid = false;
     }
 
     if (!cv) {
-        document.getElementById("cv-error").textContent = "Please upload your CV.";
+        document.getElementById("cv-error").textContent =
+            "Please upload your CV.";
         isValid = false;
     } else {
         const allowedFileTypes = [
@@ -426,13 +397,15 @@ function submitApplication() {
         ];
 
         if (!allowedFileTypes.includes(cv.type)) {
-            document.getElementById("cv-error").textContent = "Only PDF or Word files are allowed.";
+            document.getElementById("cv-error").textContent =
+                "Only PDF or Word files are allowed.";
             isValid = false;
         }
     }
 
     if (message === "") {
-        document.getElementById("message-error").textContent = "Short motivation is required.";
+        document.getElementById("message-error").textContent =
+            "Short motivation is required.";
         isValid = false;
     }
 
@@ -451,9 +424,10 @@ function submitApplication() {
         closeApplyModal();
     }, 1000);
 }
+
+
 /* This helper function creates company initials for the logo circle */
 function getInitials(companyName) {
-    /* Convert company name into initials for logo circle */
     return companyName
         .split(" ")
         .map(function (word) {
@@ -465,32 +439,22 @@ function getInitials(companyName) {
 }
 
 
-/* =====================================
-   INTERVIEW PREP LOGIC
-   ===================================== */
+/* INTERVIEW PREP LOGIC */
 
 /* This function opens or closes interview tips */
 function toggleTip(index) {
     const tips = document.querySelectorAll(".tip-text");
 
-    /* Toggle show class to open or close answer */
     tips[index].classList.toggle("show");
 }
 
 
-/* =====================================
-   INITIAL PAGE SETUP
-   Runs when page first loads
-   ===================================== */
+/* Runs when page first loads */
 
-/* Initialize readiness score */
 updateReadinessScore();
 
-/* Initialize skills summary */
 updateSkills();
 
-
-/* Initialize saved internship list */
 renderSavedInternships();
 
 loadInternships();
