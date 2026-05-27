@@ -30,7 +30,13 @@ module.exports = async (req, res) => {
       const [rows] = await pool.query("SELECT * FROM applications");
       return res.status(200).json(rows);
     }
+    if (req.method === "DELETE") {
+        await pool.query("DELETE FROM applications");
 
+        return res.status(200).json({
+        message: "All applications deleted"
+    });
+    }
     if (req.method === "POST") {
       const {
         internship_id,
