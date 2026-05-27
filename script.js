@@ -357,6 +357,10 @@ function removeSavedInternship(index) {
    APPLICATION MODAL LOGIC
    ===================================== */
 
+
+
+   
+
 /* Opens application form modal */
 function openApplyModal(index) {
     selectedInternshipIndex = index;
@@ -387,10 +391,31 @@ function submitApplication() {
     const name = document.getElementById("applicant-name").value.trim();
     const email = document.getElementById("applicant-email").value.trim();
     const message = document.getElementById("applicant-message").value.trim();
+    const cv = document.getElementById("cv").files[0];
 
-    /* Simple validation */
-    if (name === "" || email === "" || message === "") {
-        alert("Please fill in all fields.");
+    /* Check that all fields are filled */
+    if (name === "" || email === "" || message === "" || !cv) {
+        alert("Please fill in all fields and upload your CV.");
+        return;
+    }
+
+    /* Check correct email format */
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    /* Check CV file type */
+    const allowedFileTypes = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ];
+
+    if (!allowedFileTypes.includes(cv.type)) {
+        alert("Only PDF or Word documents are allowed.");
         return;
     }
 
@@ -408,6 +433,21 @@ function submitApplication() {
         closeApplyModal();
     }, 1000);
 }
+
+    /* Save applied internship index to prevent duplicate applications */
+    appliedInternships.push(selectedInternshipIndex);
+
+    document.getElementById("application-success").textContent =
+        "Application submitted successfully!";
+
+    /* Re-render internship cards so Apply button becomes Applied */
+    renderInternships("All");
+
+    /* Close popup after short delay */
+    setTimeout(function () {
+        closeApplyModal();
+    }, 1000);
+
 
 /* This helper function creates company initials for the logo circle */
 function getInitials(companyName) {
