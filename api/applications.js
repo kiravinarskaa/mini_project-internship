@@ -40,6 +40,20 @@ module.exports = async (req, res) => {
         motivation
       } = req.body;
 
+      /* Check if this email already applied for this internship */
+      const [existing] = await pool.query(
+        `SELECT * FROM applications
+         WHERE internship_id = ? AND email = ?`,
+        [internship_id, email]
+      );
+
+      if (existing.length > 0) {
+        return res.status(409).json({
+          error: "You have already applied for this internship."
+        });
+      }
+
+      /* Save new application */
       await pool.query(
         `INSERT INTO applications
         (internship_id, student_name, email, cv_file_name, motivation)
