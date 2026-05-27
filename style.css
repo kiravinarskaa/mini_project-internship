@@ -767,6 +767,7 @@ body {
 
 /* Save and apply buttons */
 .save-btn,
+.saved-btn,
 .apply-btn {
     border: none;
     cursor: pointer;
