@@ -1218,3 +1218,10 @@ body {
     background: #f8fafc;
     cursor: pointer;
 }
+/*Error message style for form validation*/
+.field-error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 5px;
+    display: block;
+}

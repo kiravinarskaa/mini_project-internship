@@ -393,62 +393,64 @@ function submitApplication() {
     const message = document.getElementById("applicant-message").value.trim();
     const cv = document.getElementById("cv").files[0];
 
-    /* Check that all fields are filled */
-    if (name === "" || email === "" || message === "" || !cv) {
-        alert("Please fill in all fields and upload your CV.");
-        return;
+    document.getElementById("name-error").textContent = "";
+    document.getElementById("email-error").textContent = "";
+    document.getElementById("cv-error").textContent = "";
+    document.getElementById("message-error").textContent = "";
+
+    let isValid = true;
+
+    if (name === "") {
+        document.getElementById("name-error").textContent = "Full name is required.";
+        isValid = false;
     }
 
-    /* Check correct email format */
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
+    if (email === "") {
+        document.getElementById("email-error").textContent = "Email is required.";
+        isValid = false;
+    } else if (!emailPattern.test(email)) {
+        document.getElementById("email-error").textContent = "Enter a valid email address.";
+        isValid = false;
+    }
+
+    if (!cv) {
+        document.getElementById("cv-error").textContent = "Please upload your CV.";
+        isValid = false;
+    } else {
+        const allowedFileTypes = [
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        ];
+
+        if (!allowedFileTypes.includes(cv.type)) {
+            document.getElementById("cv-error").textContent = "Only PDF or Word files are allowed.";
+            isValid = false;
+        }
+    }
+
+    if (message === "") {
+        document.getElementById("message-error").textContent = "Short motivation is required.";
+        isValid = false;
+    }
+
+    if (!isValid) {
         return;
     }
 
-    /* Check CV file type */
-    const allowedFileTypes = [
-        "application/pdf",
-        "application/msword",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ];
-
-    if (!allowedFileTypes.includes(cv.type)) {
-        alert("Only PDF or Word documents are allowed.");
-        return;
-    }
-
-    /* Save applied internship index to prevent duplicate applications */
     appliedInternships.push(selectedInternshipIndex);
 
     document.getElementById("application-success").textContent =
         "Application submitted successfully!";
 
-    /* Re-render internship cards so Apply button becomes Applied */
     renderInternships("All");
 
-    /* Close popup after short delay */
     setTimeout(function () {
         closeApplyModal();
     }, 1000);
 }
-
-    /* Save applied internship index to prevent duplicate applications */
-    appliedInternships.push(selectedInternshipIndex);
-
-    document.getElementById("application-success").textContent =
-        "Application submitted successfully!";
-
-    /* Re-render internship cards so Apply button becomes Applied */
-    renderInternships("All");
-
-    /* Close popup after short delay */
-    setTimeout(function () {
-        closeApplyModal();
-    }, 1000);
-
-
 /* This helper function creates company initials for the logo circle */
 function getInitials(companyName) {
     /* Convert company name into initials for logo circle */
