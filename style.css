@@ -782,7 +782,7 @@ body {
     background: rgba(99, 102, 241, 0.12);
 }
 /* Apply button style */
-.apply-btn {
+.apply-btn, .applied-btn {
     color: white;
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
 }
