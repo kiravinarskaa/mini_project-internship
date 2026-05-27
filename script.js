@@ -413,16 +413,48 @@ function submitApplication() {
         return;
     }
 
-    appliedInternships.push(selectedInternshipIndex);
+    const internship = internships[selectedInternshipIndex];
+
+/* Send application to backend API */
+fetch("/api/applications", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+        internship_id: internship.id,
+        student_name: name,
+        email: email,
+        cv_file_name: cv.name,
+        motivation: message
+    })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+
+        appliedInternships.push(selectedInternshipIndex);
+
+        document.getElementById("application-success").textContent =
+            "Application submitted successfully!";
+
+        renderInternships("All");
+
+        setTimeout(function () {
+            closeApplyModal();
+        }, 1000);
+
+})
+.catch(function(error) {
+
+    console.log("Application error:", error);
 
     document.getElementById("application-success").textContent =
-        "Application submitted successfully!";
+        "Failed to submit application.";
 
-    renderInternships("All");
-
-    setTimeout(function () {
-        closeApplyModal();
-    }, 1000);
+});
 }
 
 
