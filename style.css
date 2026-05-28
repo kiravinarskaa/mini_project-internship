@@ -1237,3 +1237,34 @@ body {
     margin-top: 5px;
     display: block;
 }
+/* FIX MOBILE HEADER */
+@media (max-width: 640px) {
+    .site-header {
+        position: static;
+        padding: 10px;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        border-radius: 24px;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .nav-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .nav-links a {
+        text-align: center;
+        padding: 8px 6px;
+        font-size: 14px;
+    }
+
+    .nav-button {
+        display: none;
+    }
+}
