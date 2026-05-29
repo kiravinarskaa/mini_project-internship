@@ -65,13 +65,19 @@ This project was built using:
 - HTML5
 - CSS3
 - JavaScript
+- Node.js
+- MySQL
 
 Additional concepts used:
+
 - Responsive Web Design
 - CSS Grid
 - Flexbox
 - DOM Manipulation
 - Interactive UI Components
+- API
+- Database Integration
+- Server-side Data Handling
 
 ---
 
@@ -108,13 +114,14 @@ InternReady solves these problems by providing a single platform for preparation
 
 ---
 
-## Possible future improvements include:
+## Possible Future Improvements
+
 - User accounts and authentication
-- Real internship database integration
 - Resume builder
 - AI-based career recommendations
-- Internship application tracking
-- Backend and database support
+- Advanced internship application tracking
+- Admin dashboard for managing internships
+- File storage for uploaded CVs
 
 ---
 

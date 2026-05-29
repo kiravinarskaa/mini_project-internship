@@ -1,18 +1,27 @@
 const mysql = require("mysql2/promise");
 
+
+// Create a connection pool to the MySQL database.
+// A pool is more efficient than opening a new connection
+// for every request.
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
+  host: process.env.DB_HOST,  // Database host
+  user: process.env.DB_USER,    // Database username
+  password: process.env.DB_PASSWORD,  // Database password
+  database: process.env.DB_NAME,    // Database name
+  port: process.env.DB_PORT,     // Database port
   ssl: {
-    rejectUnauthorized: false
+    rejectUnauthorized: false     // Allow SSL connection
   }
 });
 
+// Main API handler
 module.exports = async (req, res) => {
   try {
+
+    // Create the applications table if it does not exist.
+    // This runs every time the API is called, but MySQL
+    // will only create the table once.
     await pool.query(`
       CREATE TABLE IF NOT EXISTS applications (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -26,10 +35,16 @@ module.exports = async (req, res) => {
       )
     `);
 
+    
+    // GET REQUEST
+    // Return all applications
     if (req.method === "GET") {
       const [rows] = await pool.query("SELECT * FROM applications");
       return res.status(200).json(rows);
     }
+
+    // DELETE REQUEST
+    // Delete all applications
     if (req.method === "DELETE") {
         await pool.query("DELETE FROM applications");
 
@@ -37,7 +52,11 @@ module.exports = async (req, res) => {
         message: "All applications deleted"
     });
     }
+
+    // POST REQUEST
+    // Save a new application
     if (req.method === "POST") {
+       // Extract data sent from the frontend
       const {
         internship_id,
         student_name,
@@ -53,6 +72,8 @@ module.exports = async (req, res) => {
         [internship_id, email]
       );
 
+      // If a matching application exists,
+      // prevent duplicate submissions.
       if (existing.length > 0) {
         return res.status(409).json({
           error: "You have already applied for this internship."
@@ -67,14 +88,21 @@ module.exports = async (req, res) => {
         [internship_id, student_name, email, cv_file_name, motivation]
       );
 
+
+
       return res.status(201).json({
         message: "Application saved successfully"
       });
     }
 
+    // Send a 405 (Method Not Allowed) response when a request
+// uses an HTTP method that is not implemented by this API.
+// Supported methods: GET, POST, DELET
     res.status(405).json({
       error: "Method not allowed"
     });
+
+      // Handle unexpected server or database errors
 
   } catch (error) {
     res.status(500).json({

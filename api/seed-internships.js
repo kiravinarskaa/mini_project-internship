@@ -1,5 +1,7 @@
 const mysql = require("mysql2/promise");
 
+// Create a connection pool for the MySQL database.
+// Using a pool improves performance by reusing connections.
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -11,12 +13,18 @@ const pool = mysql.createPool({
   }
 });
 
+// API endpoint used to populate the internships table
+// with sample internship opportunities.
 module.exports = async (req, res) => {
 
   try {
 
+
+    // Remove all existing internship records.
+    // This ensures that only the latest sample data exists.
     await pool.query("DELETE FROM internships");
 
+       // Insert sample internship opportunities into the database.
     await pool.query(`
       INSERT INTO internships
       (company, title, category, location, deadline, description, requirements, offers)
@@ -78,12 +86,16 @@ module.exports = async (req, res) => {
       )
     `);
 
+
+    // Send a success response when internships
+    // have been inserted successfully.
     res.status(200).json({
       message: "Internships added successfully"
     });
 
   } catch (error) {
 
+      // Handle database or server errors.
     res.status(500).json({
       error: error.message
     });
